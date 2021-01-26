@@ -1,0 +1,5 @@
+[
+  { "id": 1, "name": "Виноград", "count": 40, "priceForOne": 50 },
+  { "id": 2, "name": "Апельсин", "count": 30, "priceForOne": 50 },
+  { "id": 3, "name": "Яблоко", "count": 10, "priceForOne": 100 }
+]

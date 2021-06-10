@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import TableData from '../components/TableData';
 
@@ -28,3 +29,10 @@ const TableDataContainer = ({ isEdit, replace, handleUpdate, children }) => {
 };
 
 export default TableDataContainer;
+
+TableDataContainer.propTypes = {
+  isEdit: PropTypes.bool.isRequired,
+  replace: PropTypes.string.isRequired,
+  handleUpdate: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+};

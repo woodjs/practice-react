@@ -1,0 +1,20 @@
+.table {
+  box-shadow: 0px 2px 2px #aaa;
+  background-color: #fff;
+  table-layout: fixed;
+
+  & td {
+    max-width: 200px;
+    position: relative;
+  }
+
+  &__input {
+    box-sizing: border-box;
+    width: 90%;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

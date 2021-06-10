@@ -1,25 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, compose } from 'redux';
-import { Provider } from 'react-redux';
-import rootReducer from './redux/rootReducer';
-import 'reset-css';
+import { Provider, useDispatch } from 'react-redux';
+import io from 'socket.io-client';
+
+// import { SocketContext, socket } from './socket';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './scss/_base.scss';
+
+import store from './redux/store';
 import App from './App';
 
-const store = createStore(
-  rootReducer,
-  compose(
-    // eslint-disable-next-line no-underscore-dangle
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    /* eslint-enable */
-  )
-);
+const socket = io('http://localhost:9000/');
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App socket={socket} />
   </Provider>,
   document.getElementById('root')
 );

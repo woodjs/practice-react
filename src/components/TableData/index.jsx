@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const TableData = ({
   isEdit,
@@ -31,3 +32,12 @@ const TableData = ({
 };
 
 export default TableData;
+
+TableData.propTypes = {
+  isEdit: PropTypes.bool.isRequired,
+  editStatus: PropTypes.bool.isRequired,
+  handleEditUpdate: PropTypes.func.isRequired,
+  handleChangeInput: PropTypes.func.isRequired,
+  handleKeyPress: PropTypes.func.isRequired,
+  data: PropTypes.node.isRequired,
+};

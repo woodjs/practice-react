@@ -1,29 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import socketClient from 'socket.io-client';
-import Table from '../components/Table';
 import TableRow from '../components/TableRow';
 import TableDataContainer from './TableDataContainer';
-import { updateDataTable, getData } from '../redux/actions';
-import { SERVER } from '../redux/types';
+import TableProducts from '../components/TableProducts';
 
-const TableContainer = () => {
+import { updateDataTable, getData } from '../redux/actions/products';
+import { getProducts } from '../redux/reducers/products';
+
+const TableContainer = ({ socket }) => {
   const dispatch = useDispatch();
-  const socket = socketClient.connect(SERVER); // connect к сокету
-  // Тут я вешаю событие в сокетах на products, от сервера получаю уже готовый массив
+
+  const products = useSelector((state) => getProducts(state.products));
+
   socket.on('products', (data) => {
     dispatch(getData(data));
   });
 
-  socket.on('connection', (username) => {
-    console.log(`Привет, ${username}`);
-  });
-
-  socket.on('message', (message) => {
-    console.log(`Сообщение: ${message}`);
-  });
-
-  const products = useSelector((state) => state.products.products);
   const productRendering = (data) => {
     const totalProducts = (arr) => {
       let sum = 0;
@@ -38,8 +30,13 @@ const TableContainer = () => {
           {data.map((product, index) => {
             const totalProduct = product.count * product.priceForOne;
             const updateProduct = (value, replace) => {
-              const object = { id: index + 1, value, replace };
+              const object = {
+                id: index + 1,
+                value,
+                replace,
+              };
               dispatch(updateDataTable(object));
+              socket.emit('update', object);
             };
             return (
               <TableRow key={product.id}>
@@ -64,7 +61,7 @@ const TableContainer = () => {
                 >
                   {product.priceForOne}
                 </TableDataContainer>
-                <TableDataContainer>{totalProduct}</TableDataContainer>
+                <td>{totalProduct}</td>
               </TableRow>
             );
           })}
@@ -93,9 +90,10 @@ const TableContainer = () => {
   };
 
   return (
-    <Table
-      renderData={productRendering(products)} // renderData
-    />
+    // <Table
+    //   renderData={productRendering(products)} // renderData
+    // />
+    <TableProducts renderData={productRendering(products)} />
   );
 };
 

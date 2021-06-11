@@ -1,3 +1,0 @@
-export const PUSH_CURSOR = 'PUSH_CURSOR';
-export const REMOVE_CURSOR = 'REMOVE_CURSOR';
-export const CHANGE_CURSOR = 'CHANGE_CURSOR';

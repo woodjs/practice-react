@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import './App.scss';
+import { useDispatch } from 'react-redux';
+
+import './scss/App.scss';
+
 import TableContainer from './containers/TableContainer';
 import Cursor from './components/Cursor';
+
 import { addCursor } from './redux/actions/cursors';
 
 const App = ({ socket }) => {
   const dispatch = useDispatch();
-  const [users, setUsers] = useState();
+  // const [users, setUsers] = useState();
 
   socket.on('connection', (username) => {
     dispatch(addCursor(username));

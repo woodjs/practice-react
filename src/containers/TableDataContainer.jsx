@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+
 import TableData from '../components/TableData';
 
 const TableDataContainer = ({ isEdit, replace, handleUpdate, children }) => {

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import TableRow from '../components/TableRow';
 import TableDataContainer from './TableDataContainer';
 import TableProducts from '../components/TableProducts';
@@ -89,12 +90,7 @@ const TableContainer = ({ socket }) => {
     );
   };
 
-  return (
-    // <Table
-    //   renderData={productRendering(products)} // renderData
-    // />
-    <TableProducts renderData={productRendering(products)} />
-  );
+  return <TableProducts renderData={productRendering(products)} />;
 };
 
 export default TableContainer;
